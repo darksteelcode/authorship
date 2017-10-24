@@ -26,7 +26,7 @@ class Punctuation(base.BaseFeature):
                 if c == p:
                     self.f[puncIndex]+=1
                 puncIndex+=1
-        numPuncs = sum(self.text.count(p) for p in self.puncs
+        numPuncs = sum(self.text.count(p) for p in self.puncs)
         self.f/=numPuncs
         self.endCalc()
         return self.f
