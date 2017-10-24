@@ -6,8 +6,9 @@ debug = True
 authors = ["Jane Austen", "Walter Scott"]
 #Number of samples per author
 numSamples = 5
-#Data for classifier training - needs to be changed for use with more than one feature
-calculatedData = np.empty(shape=(len(authors),numSamples,30))
+#Data for classifier training
+calculatedData = [[[]]*numSamples for i in range(len(authors))]
+print calculatedData
 #Text format [authorNum, path]
 texts = [[0, "texts/Jane_Austen/sense_and_sensibility"], [0, "texts/Jane_Austen/emma"], [0,"texts/Jane_Austen/northanger_abbey"], [0,"texts/Jane_Austen/persuasion"], [0,"texts/Jane_Austen/pride_and_prejudice"], [1,"texts/Walter_Scott/ivanhoe"], [1,"texts/Walter_Scott/lady_of_the_lake"], [1,"texts/Walter_Scott/letters_on_demonology_and_witchcraft"], [1,"texts/Walter_Scott/talisman"], [1,"texts/Walter_Scott/waverley"]]
 featureCalcs = []
