@@ -19,6 +19,15 @@ class Punctuation(base.BaseFeature):
         self.beginCalc()
         self.checkArgs()
         #Add Calcs here for punctuation
+        self.f = np.zeros(len(self.puncs), dtype=np.float32)
+        for c in self.text:
+            puncIndex = 0
+            for p in self.puncs:
+                if c == p:
+                    self.f[puncIndex]+=1
+                puncIndex+=1
+        numPuncs = sum(self.text.count(p) for p in self.puncs
+        self.f/=numPuncs
         self.endCalc()
         return self.f
 
