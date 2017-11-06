@@ -1,15 +1,19 @@
 import numpy as np
 import time
+import os
+import glob
 import calcFeatures
 from classifiers import simple
 debug = True
-authors = ["Jane Austen", "Walter Scott"]
+authors = ["Jane Austen", "Walter Scott", "Arthur Conan Doyle"]
 #Number of samples per author
 numSamples = 5
 #Data for classifier training
 calculatedData = [[[]]*numSamples for i in range(len(authors))]
 #Text format [authorNum, path]
-texts = [[0, "texts/Jane_Austen/sense_and_sensibility"], [0, "texts/Jane_Austen/emma"], [0,"texts/Jane_Austen/northanger_abbey"], [0,"texts/Jane_Austen/persuasion"], [0,"texts/Jane_Austen/pride_and_prejudice"], [1,"texts/Walter_Scott/ivanhoe"], [1,"texts/Walter_Scott/lady_of_the_lake"], [1,"texts/Walter_Scott/letters_on_demonology_and_witchcraft"], [1,"texts/Walter_Scott/talisman"], [1,"texts/Walter_Scott/waverley"]]
+texts = [[0, "texts/Jane_Austen/sense_and_sensibility"], [0, "texts/Jane_Austen/emma"], [0,"texts/Jane_Austen/northanger_abbey"], [0,"texts/Jane_Austen/persuasion"], [0,"texts/Jane_Austen/pride_and_prejudice"],
+[1,"texts/Walter_Scott/ivanhoe"], [1,"texts/Walter_Scott/lady_of_the_lake"], [1,"texts/Walter_Scott/letters_on_demonology_and_witchcraft"], [1,"texts/Walter_Scott/talisman"], [1,"texts/Walter_Scott/waverley"],
+[2, "texts/Arthur_Doyle/hounds_of_baskervilles"], [2, "texts/Arthur_Doyle/lost_world"], [2, "texts/Arthur_Doyle/sign_of_four"], [2, "texts/Arthur_Doyle/study_in_scarlet"], [2, "texts/Arthur_Doyle/valley_of_fear"]]
 featureCalcs = []
 #Create a FeatureCalculator for each text
 for t in texts:
@@ -18,7 +22,7 @@ for t in texts:
     f.close()
     featureCalcs.append(calcFeatures.FeatureCalculator(fullText,t[1]))
 
-unknownText = "texts/Unknown/old_mortality.txt"
+unknownDir = "texts/Unknown/old_mortality.txt"
 
 startTime = time.time()
 def listTexts():
