@@ -22,9 +22,27 @@ for t in texts:
     f.close()
     featureCalcs.append(calcFeatures.FeatureCalculator(fullText,t[1]))
 
-unknownDir = "texts/Unknown/old_mortality.txt"
+unknownDir = "texts/Unknown"
+unknownAttributions = [-1]*(len(authors)*2)
 
 startTime = time.time()
+
+def calcUnknownFeats(classifier):
+    os.chdir(unknownDir)
+    #Run on each work
+    i = 0
+    for f in glob.glob("*.txt"):
+        unF = open(f, 'r')
+        unCalc = calcFeatures.FeatureCalculator(unF.read(), f)
+        unF.close()
+        unFeats = unCalc.calcFeatures()
+        #Flatten to classify using one dimensional classifier
+        unFeats = [item for items in unFeats for item in items]
+        guess = classifier.run(unFeats)
+        print "Guessed Author for " + f + " is Number " + str(guess) + ", " + authors[guess]
+        unknownAttributions[i] = [f, authors[guess]]
+        i+=1
+
 def listTexts():
     if debug:
         print "--TEXTS--"
@@ -61,14 +79,11 @@ def run():
         textIndex+=1
     classifier = simple.SimpleClassifier(len(authors), len(featData), debug)
     classifier.train(calculatedData)
-    unF = open(unknownText, 'r')
-    unCalc = calcFeatures.FeatureCalculator(unF.read(), 'Unknown')
-    unF.close()
-    unFeats = unCalc.calcFeatures()
-    #Flatten to classify using one dimensional classifier
-    unFeats = [item for items in unFeats for item in items]
-    guess = classifier.run(unFeats)
-    print "Guessed Author is Number " + str(guess) + ", " + authors[guess]
+    calcUnknownFeats(classifier)
+    print
+    for f in unknownAttributions:
+        print f[0] + " attributed to " + f[1]
+    print
     finish()
 
 run()
