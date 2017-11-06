@@ -27,12 +27,10 @@ class SentenceLength(base.BaseFeature):
                 self.f[0]+=1.0
             else:
                 numSents+=1
+        self.f /= numSents
         self.endCalc()
         return self.f
 
     def debugStart(self):
         if self.debug:
             print "--SentenceLength--"
-
-f = SentenceLength("Hello. This has a length of a number.", "Test")
-f.calc()

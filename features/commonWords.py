@@ -41,7 +41,6 @@ class CommonWords(base.BaseFeature):
             wordNum+=1
 
         numOfWords = float(self.text.count(" "))
-        print numOfWords
         self.f/=numOfWords
         self.endCalc()
         return self.f
