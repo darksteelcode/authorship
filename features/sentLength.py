@@ -11,8 +11,8 @@ class SentenceLength(base.BaseFeature):
     def checkArgs(self):
         if len(self.args) != 1:
             if self.debug:
-                print "No ending marks found, using defaults"
-                self.endings = [".", "!", "?"]
+                print "No ending mark found, using period"
+                self.ending = "."
         else:
             self.endings = self.args[0]
 
@@ -21,12 +21,16 @@ class SentenceLength(base.BaseFeature):
         self.beginCalc()
         self.checkArgs()
         self.f = np.zeros(1, dtype=np.float32)
-        numSents = 0;
-        for c in self.text:
-            if not c in self.endings:
-                self.f[0]+=1.0
-            else:
-                numSents+=1
+        numSents = 0
+        #Index of next ending mark (a period)
+        endIndex = self.text.find(self.ending)
+        #Index of previous ending mark-used to find sentence length
+        prevIndex = 0
+        while endIndex != -1:
+            numSents += 1
+            self.f[0] += endIndex - prevIndex
+            prevIndex = endIndex
+            endIndex = self.text.find(self.ending, prevIndex+1)
         self.f /= numSents
         self.endCalc()
         return self.f

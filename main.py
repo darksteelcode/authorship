@@ -4,7 +4,7 @@ import os
 import glob
 import calcFeatures
 from classifiers import simple
-debug = True
+debug = False
 authors = ["Jane Austen", "Walter Scott", "Arthur Conan Doyle"]
 #Number of samples per author
 numSamples = 5
@@ -20,10 +20,10 @@ for t in texts:
     f = open(t[1] + ".txt", 'r')
     fullText = f.read()
     f.close()
-    featureCalcs.append(calcFeatures.FeatureCalculator(fullText,t[1]))
+    featureCalcs.append(calcFeatures.FeatureCalculator(fullText,t[1], debug=debug))
 
 unknownDir = "texts/Unknown"
-unknownAttributions = [-1]*(len(authors)*2)
+unknownAttributions = []
 
 startTime = time.time()
 
@@ -40,7 +40,7 @@ def calcUnknownFeats(classifier):
         unFeats = [item for items in unFeats for item in items]
         guess = classifier.run(unFeats)
         print "Guessed Author for " + f + " is Number " + str(guess) + ", " + authors[guess]
-        unknownAttributions[i] = [f, authors[guess]]
+        unknownAttributions.append([f, authors[guess]])
         i+=1
 
 def listTexts():
@@ -83,6 +83,7 @@ def run():
     print
     for f in unknownAttributions:
         print f[0] + " attributed to " + f[1]
+        print
     print
     finish()
 
