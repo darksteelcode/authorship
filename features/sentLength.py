@@ -6,7 +6,7 @@ import base
 class SentenceLength(base.BaseFeature):
     def __init__(self, text,  textName="", args=[], debug=True):
         base.BaseFeature.__init__(self, text, textName, args, debug)
-        self.endings = []
+        self.ending = ""
 
     def checkArgs(self):
         if len(self.args) != 1:
@@ -14,7 +14,7 @@ class SentenceLength(base.BaseFeature):
                 print "No ending mark found, using period"
                 self.ending = "."
         else:
-            self.endings = self.args[0]
+            self.ending = self.args[0]
 
     def calc(self):
         self.debugStart()
