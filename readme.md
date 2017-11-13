@@ -39,6 +39,7 @@ Format for `AUTHORS.txt`
 File name and author are separated by a `:`, with no whitespace except in the author's name
 Example:
 
-```pickwick_papers.txt:Charles Dickens
+```
+pickwick_papers.txt:Charles Dickens
 return_of_sherlock_holmes.txt:Arthur Conan Doyle
 ```
