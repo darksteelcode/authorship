@@ -11,3 +11,6 @@ This is a project that attempts to guess at the author of a text by calculating 
 2. Classifiers are trained with the calculated features to be able to guess which author wrote something
 3. The features of a text with unknown authorship are calculatedData
 4. These features are fed into the trained classifier, and the resulting author is the guessed author
+
+### Features
+  #### (In `Features` Directory)
