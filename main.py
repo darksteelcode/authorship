@@ -1,6 +1,5 @@
 import numpy as np
 import time
-import os, sys
 import glob
 import calcFeatures
 from classifiers import simple
@@ -14,18 +13,10 @@ numSamples = 5
 calculatedData = [[[]]*numSamples for i in range(len(authors))]
 featureCalcs = []
 #Create a FeatureCalculator for each text
-'''for t in texts:
-    f = open(t[1] + ".txt", 'r')
-    fullText = f.read()
-    f.close()
-    featureCalcs.append(calcFeatures.FeatureCalculator(fullText,t[1], debug=debug))'''
 for d in textDirs:
-    #Start at directory script run from
-    os.chdir(sys.path[0])
-    #Go to directory of texts
-    os.chdir(d)
     featureCalcs.append([])
-    for f in glob.glob("*.txt"):
+    for f in glob.glob(d + "/*.txt"):
+        print f
         textFile = open(f, 'r')
         featureCalcs[len(featureCalcs)-1].append(calcFeatures.FeatureCalculator(textFile.read(),f,debug=debug))
         textFile.close()
@@ -36,13 +27,9 @@ unknownAttributions = []
 startTime = time.time()
 
 def calcUnknownFeats(classifier):
-    #Start at directory script run from
-    os.chdir(sys.path[0])
-    #Go to directory of texts
-    os.chdir(unknownDir)
     #Run on each work
     i = 0
-    for f in glob.glob("*.txt"):
+    for f in glob.glob(unknownDir + "/*.txt"):
         unF = open(f, 'r')
         unCalc = calcFeatures.FeatureCalculator(unF.read(), f)
         unF.close()
