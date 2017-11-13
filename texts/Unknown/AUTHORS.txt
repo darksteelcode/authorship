@@ -1,0 +1,8 @@
+antiquary.txt:Walter Scott
+lady_susan.txt:Jane Austen
+mansfield_park.txt:Jane Austen
+old_mortality.txt:Walter Scott
+oliver_twist.txt:Charles Dickens
+pickwick_papers.txt:Charles Dickens
+return_of_sherlock_holmes.txt:Arthur Conan Doyle
+tales_of_terror_and_mystery.txt:Arthur Conan Doyle

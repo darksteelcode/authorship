@@ -16,14 +16,15 @@ featureCalcs = []
 for d in textDirs:
     featureCalcs.append([])
     for f in glob.glob(d + "/*.txt"):
-        print f
         textFile = open(f, 'r')
         featureCalcs[len(featureCalcs)-1].append(calcFeatures.FeatureCalculator(textFile.read(),f,debug=debug))
         textFile.close()
 
 unknownDir = "texts/Unknown"
 unknownAttributions = []
-
+#Used only to measure accuracy, not required(set to False if authors not known)
+realAttributionsFile = "texts/Unknown/AUTHORS.txt"
+realAttributions = []
 startTime = time.time()
 
 def calcUnknownFeats(classifier):
@@ -62,6 +63,22 @@ def startFeatureCalc():
     if debug:
         print "--FEATURE CALCULATIONS--"
 
+def readAttributionsFile():
+    if realAttributionsFile:
+        f = open(realAttributionsFile, 'r')
+        for l in f:
+            work = l.split(":")[0]
+            author = l.split(":")[1].replace("\n", "")
+            realAttributions.append([work, author])
+    if debug:
+        print "Recorded known attributions from " + realAttributionsFile
+
+def findRealAttributed(work):
+    for w in realAttributions:
+        if w[0] in work:
+            return w[1]
+    return "NOT_ATTRIBUTED"
+
 def run():
     start()
     listTexts()
@@ -81,11 +98,16 @@ def run():
     classifier = simple.SimpleClassifier(len(authors), len(featData), debug)
     classifier.train(calculatedData)
     calcUnknownFeats(classifier)
+    readAttributionsFile()
     print "--- Results ---"
+    correct = 0
     for f in unknownAttributions:
         print f[0] + " attributed to " + f[1]
-        print
+        print "Really: " + findRealAttributed(f[0])
+        if findRealAttributed(f[0]) == f[1]:
+            correct += 1
     print
+    print str(correct) + " of " + str(len(unknownAttributions)) + " attributed correctly."
+    print str(round(float(correct)/float(len(unknownAttributions))*100)) + "% Correct"
     finish()
-
 run()
