@@ -5,9 +5,9 @@ When authors write, they use unconscious and consistent stylistic choices and ha
 
 This is a project that attempts to guess at the author of a text by calculating numerical features (in the `features` directory) and using classifiers (in the `classifiers` directory).
 
-#### Process
+### Process
 
-1. Numerical Features for a number of texts with known authors are calculated
-2. Classifiers are trained on the features calculated
-3. Features are calculated for the text with the unknown author
-4. Text with unknown author is classified by trained classifiers
+1. Features are calculated for writings with know Authorship
+2. Classifiers are trained with the calculated features to be able to guess which author wrote something
+3. The features of a text with unknown authorship are calculatedData
+4. These features are fed into the trained classifier, and the resulting author is the guessed author
