@@ -28,18 +28,19 @@ class WeightedClassifier():
         #for each group of data
         for g in range(self.numGroups):
             #Average that data into one array
-            self.means[g] = np.mean(data[g], axis=0)
+            self.means[g] = np.multiply(np.mean(data[g], axis=0), self.weights)
         if self.debug:
             print "WeightedClassifier Trained Successfully"
         return self.means
 
     def dist(self, p1, p2):
-        #get size of diferrence matrix/vector multiplied by weights
-        return np.linalg.norm(np.multiply(p1-p2, self.weights))
+        #get size of diferrence matrix/vector
+        return np.linalg.norm(p1-p2)
 
     def run(self, data):
         if self.debug:
             print "WeightedClassifier Classification Started"
+        data = np.multiply(data, self.weights)
         #set minDist to infinity
         minDist = np.inf
         minGroupIndex = 0
