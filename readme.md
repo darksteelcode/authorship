@@ -13,4 +13,31 @@ This is a project that attempts to guess at the author of a text by calculating 
 4. These features are fed into the trained classifier, and the resulting author is the guessed author
 
 ### Features
-  ##### (In `Features` Directory)
+(In `features` Directory)
+
+#### CommonWords
+  This feature calculates the frequency of the thirty most common english words throughout the text
+
+#### Punctuation
+  This feature calculates the frequency of a few basic punctuation marks in the text
+
+#### SentenceLength
+  This feature calculates the average length, in characters, of sentences in the text
+
+### Texts
+(In `texts` Directory)
+
+Texts with known authors are located in sub-directories named for their authors
+Texts with unknown authors are located in the `Unknown` sub-directory
+
+#### `AUTHORS.txt`
+(`texts/Unknown/AUTHORS.txt`)
+
+This file contains a list of the unknown texts and their "known" authors. This file is not required, nor is a author needed for any unknown text. The only use of this file is to measure accuracy of guesses after they have been made. When the program is applied to actually unknown texts, no author is needed in `AUTHORS.txt`.
+
+Format for `AUTHORS.txt`
+File name and author are separated by a `:`, with no whitespace except in the author's name
+Example:
+
+`pickwick_papers.txt:Charles Dickens
+return_of_sherlock_holmes.txt:Arthur Conan Doyle`
