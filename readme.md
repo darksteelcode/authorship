@@ -13,4 +13,4 @@ This is a project that attempts to guess at the author of a text by calculating 
 4. These features are fed into the trained classifier, and the resulting author is the guessed author
 
 ### Features
-  #### (In `Features` Directory)
+  ##### (In `Features` Directory)
