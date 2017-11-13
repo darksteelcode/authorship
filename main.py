@@ -31,6 +31,8 @@ def calcUnknownFeats(classifier):
     #Run on each work
     i = 0
     for f in glob.glob(unknownDir + "/*.txt"):
+        if f in realAttributionsFile:
+            continue
         unF = open(f, 'r')
         unCalc = calcFeatures.FeatureCalculator(unF.read(), f)
         unF.close()
