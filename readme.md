@@ -40,4 +40,5 @@ File name and author are separated by a `:`, with no whitespace except in the au
 Example:
 
 ```pickwick_papers.txt:Charles Dickens
-return_of_sherlock_holmes.txt:Arthur Conan Doyle```
+return_of_sherlock_holmes.txt:Arthur Conan Doyle
+```
