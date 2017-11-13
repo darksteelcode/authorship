@@ -2,7 +2,7 @@ import numpy as np
 import time
 import glob
 import calcFeatures
-from classifiers import simple
+from classifiers import simple, weighted
 debug = True
 authors = ["Jane Austen", "Walter Scott", "Arthur Conan Doyle", "Charles Dickens"]
 #Index coresponds to authors array
@@ -95,7 +95,7 @@ def run():
             calculatedData[authorIndex][textIndex] = featData
             textIndex+=1
         authorIndex+=1
-    classifier = simple.SimpleClassifier(len(authors), len(featData), debug)
+    classifier = weighted.WeightedClassifier(len(authors), len(featData), debug)
     classifier.train(calculatedData)
     calcUnknownFeats(classifier)
     readAttributionsFile()
