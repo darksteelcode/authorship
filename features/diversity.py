@@ -24,4 +24,4 @@ class Diversity(base.BaseFeature):
 
     def debugStart(self):
         if self.debug:
-            print "--PunctuationFrequency--"
+            print "--Diversity--"

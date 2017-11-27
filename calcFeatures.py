@@ -1,7 +1,7 @@
 import numpy as np
-from features import base, commonWords, punctuation, sentLength
+from features import base, commonWords, punctuation, sentLength, diversity
 
-FEATURES = [commonWords.CommonWords, punctuation.Punctuation, sentLength.SentenceLength]
+FEATURES = [commonWords.CommonWords, punctuation.Punctuation, sentLength.SentenceLength, diversity.Diversity]
 
 class FeatureCalculator():
     def __init__(self, text, textName="", args=[[]] * len(FEATURES), features=FEATURES, debug=True):
