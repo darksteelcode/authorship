@@ -13,8 +13,8 @@ class WeightedClassifier():
         self.dataSize = dataSize
         self.means = np.empty(shape=[numGroups, dataSize])
         self.debug = debug
-        #Lengths of each feature 30 for commonWords, 9 for punctuation, 1 for sentLength
-        self.featureGroups = [30, 9, 1] #NEEDS TO BE UPDATED FOR NEW FEATURES
+        #Lengths of each feature 30 for commonWords, 9 for punctuation, 1 for sentLength, 1 for diversity
+        self.featureGroups = [30, 9, 1, 1] #NEEDS TO BE UPDATED FOR NEW FEATURES
         self.weights = np.empty(shape=[dataSize])
         weightIndex = 0
         for g in self.featureGroups:
