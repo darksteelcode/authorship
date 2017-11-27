@@ -15,12 +15,16 @@ class WeightedClassifier():
         self.debug = debug
         #Lengths of each feature 30 for commonWords, 9 for punctuation, 1 for sentLength, 1 for diversity
         self.featureGroups = [30, 9, 1, 1] #NEEDS TO BE UPDATED FOR NEW FEATURES
+        #Weights to make values closer to one - just aprox from sample
+        self.featureWeights = [20.0, 3.0, 0.01, 6.6]
         self.weights = np.empty(shape=[dataSize])
         weightIndex = 0
+        featureIndex = 0
         for g in self.featureGroups:
             for w in range(g):
-                self.weights[weightIndex] = (1.0/g)
+                self.weights[weightIndex] = self.featureWeights[featureIndex]
                 weightIndex+=1
+            featureIndex+=1
 
     def train(self, data):
         if self.debug:
