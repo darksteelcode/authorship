@@ -4,9 +4,9 @@ import glob
 import calcFeatures
 from classifiers import simple, weighted
 debug = True
-authors = ["Jane Austen", "Walter Scott", "Arthur Conan Doyle", "Charles Dickens"]
+authors = ["Jane Austen", "Walter Scott", "Arthur Conan Doyle", "Charles Dickens", "Mark Twain"]
 #Index coresponds to authors array
-textDirs = ["texts/Jane_Austen", "texts/Walter_Scott", "texts/Arthur_Doyle", "texts/Charles_Dickens"]
+textDirs = ["texts/Jane_Austen", "texts/Walter_Scott", "texts/Arthur_Doyle", "texts/Charles_Dickens", "texts/Mark_Twain"]
 #Number of samples per author
 numSamples = 5
 #Data for classifier training
@@ -104,12 +104,17 @@ def run():
     print "--- Results ---"
     correct = 0
     for f in unknownAttributions:
+        print "------------------------------------"
         print f[0] + " attributed to " + f[1]
         print "Really: " + findRealAttributed(f[0])
         if findRealAttributed(f[0]) == f[1]:
             correct += 1
     print
     print str(correct) + " of " + str(len(unknownAttributions)) + " attributed correctly."
-    print str(round(float(correct)/float(len(unknownAttributions))*100)) + "% Correct"
+    print
+    percent = str(round(float(correct)/float(len(unknownAttributions))*100))
+    print "*-----*\n|" + percent.zfill(5) + "|\n*-----*"
+    print  "% Correct"
+    print
     finish()
 run()
