@@ -113,7 +113,7 @@ def run():
     print str(correct) + " of " + str(len(unknownAttributions)) + " attributed correctly."
     print
     percent = str(round(float(correct)/float(len(unknownAttributions))*100))
-    print "*-----*\n|" + percent.zfill(5) + "|\n*-----*"
+    print "*-----*\n|" + percent.ljust(5) + "|\n*-----*"
     print  "% Correct"
     print
     finish()
