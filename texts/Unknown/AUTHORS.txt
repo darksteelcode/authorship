@@ -8,3 +8,5 @@ return_of_sherlock_holmes.txt:Arthur Conan Doyle
 tales_of_terror_and_mystery.txt:Arthur Conan Doyle
 adventures_of_huckleberry_finn.txt:Mark Twain
 connecticut_yankee_in_king_arthurs_court:Mark Twain
+little_men:Louisa Alcott
+jos_boys:Louisa Alcott
