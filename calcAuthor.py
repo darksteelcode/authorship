@@ -1,6 +1,6 @@
 import numpy as np
+import glob, math
 
-import numpy as np
 from features import base, commonWords, punctuation, sentLength, diversity
 
 FEATURES = [commonWords.CommonWords, punctuation.Punctuation, sentLength.SentenceLength, diversity.Diversity]
@@ -19,4 +19,10 @@ class CalcAuthorBatch():
             file = open(f)
             self.txt += file.read()
             file.close()
-        self.numSamples = floor(len(self.txt)/self.sampLength)
+        self.numSamples = math.floor(float(len(self.txt))/float(self.sampLength))
+
+    def getNumSamples(self):
+        return self.numSamples
+
+a = CalcAuthorBatch("texts/Mark_Twain", 10000)
+print a.getNumSamples()
