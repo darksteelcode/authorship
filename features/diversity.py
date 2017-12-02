@@ -1,6 +1,8 @@
 import numpy as np
 import base
 
+LENGTH = 1
+
 class Diversity(base.BaseFeature):
     def __init__(self, text,  textName="", args=[], debug=True):
         base.BaseFeature.__init__(self, text, textName, args, debug)

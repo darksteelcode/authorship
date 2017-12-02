@@ -24,5 +24,9 @@ class CalcAuthorBatch():
     def getNumSamples(self):
         return self.numSamples
 
+    def calcFeatures(self):
+        for i in range(self.numSamples):
+
+
 a = CalcAuthorBatch("texts/Mark_Twain", 10000)
 print a.getNumSamples()

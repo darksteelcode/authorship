@@ -1,6 +1,8 @@
 import numpy as np
 import base
 
+LENGTH = 1
+
 #Sentence length by number of characters
 
 class SentenceLength(base.BaseFeature):

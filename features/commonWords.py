@@ -1,5 +1,7 @@
 import numpy as np
 import base
+
+LENGTH = 30
 #Args [words, seperators]
 #words ia an array of strings to look for
 #seperators is an array of acceptable characters on either side of each words
