@@ -1,6 +1,8 @@
 import numpy as np
 import glob, math
 
+#Calculate features for a directory of texts with a given sample length - results are inpts to neural netrwork classifier
+
 from features import base, commonWords, punctuation, sentLength, diversity
 
 FEATURES = [commonWords.CommonWords, punctuation.Punctuation, sentLength.SentenceLength, diversity.Diversity]
