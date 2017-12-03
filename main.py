@@ -2,7 +2,7 @@ import numpy as np
 import time
 import glob
 import calcFeatures
-from classifiers import simple, weighted
+import calcAuthor
 debug = True
 authors = ["Jane Austen", "Walter Scott", "Arthur Conan Doyle", "Charles Dickens", "Mark Twain", "Louisa Alcott"]
 #Index coresponds to authors array
