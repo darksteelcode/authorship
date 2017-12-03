@@ -5,11 +5,13 @@ from features import base, commonWords, punctuation, sentLength, diversity
 
 FEATURES = [commonWords.CommonWords, punctuation.Punctuation, sentLength.SentenceLength, diversity.Diversity]
 
+LENGTHS = [commonWords.LENGTH, punctuation.LENGTH, sentLength.LENGTH, diversity.LENGTH]
+
 class CalcAuthorBatch():
-    def __init__(self, dir, sampLength, args=[[]] * len(FEATURES), features=FEATURES, debug=True):
+    def __init__(self, dir, sampleLength, args=[[]] * len(FEATURES), features=FEATURES, debug=True):
         self.dir = dir
         #Length of each sample, in characters
-        self.sampLength = sampLength
+        self.sampleLength = sampleLength
         self.args = args
         self.feats = features
         self.debug = debug
@@ -19,14 +21,20 @@ class CalcAuthorBatch():
             file = open(f)
             self.txt += file.read()
             file.close()
-        self.numSamples = math.floor(float(len(self.txt))/float(self.sampLength))
+        self.numSamples = int(math.floor(float(len(self.txt))/float(self.sampleLength)))
+        self.f = np.zeros((self.numSamples, sum(LENGTHS)))
 
     def getNumSamples(self):
         return self.numSamples
 
     def calcFeatures(self):
         for i in range(self.numSamples):
-
-
-a = CalcAuthorBatch("texts/Mark_Twain", 10000)
-print a.getNumSamples()
+            calculatedFeats = []
+            for feat in self.feats:
+                f = feat(self.txt[i*self.sampleLength:(i+1)*self.sampleLength], self.dir, [], self.debug)
+                calculatedFeats.append(f.calc())
+            self.f[i] = np.concatenate(calculatedFeats)
+            if self.debug:
+                print "Training Sample"
+                print self.f[i]
+        return self.f
