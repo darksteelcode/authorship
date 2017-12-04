@@ -1,6 +1,7 @@
 import numpy as np
 import calcFeatures
 import calcAuthor
+from classifiers import neural
 debug = True
 authors = ["Jane Austen", "Walter Scott", "Arthur Conan Doyle", "Charles Dickens", "Mark Twain", "Louisa Alcott"]
 #Index coresponds to authors array
