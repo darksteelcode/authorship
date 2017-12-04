@@ -27,7 +27,7 @@ class CommonWords(base.BaseFeature):
         self.debugStart()
         self.beginCalc()
         self.checkArgs()
-        self.f = np.zeros(len(self.wrds), dtype=np.float32)
+        self.f = np.zeros(len(self.wrds))
         #Calculations go here
         wordNum = 0
         for w in self.wrds:

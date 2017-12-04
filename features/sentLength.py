@@ -22,7 +22,7 @@ class SentenceLength(base.BaseFeature):
         self.debugStart()
         self.beginCalc()
         self.checkArgs()
-        self.f = np.zeros(1, dtype=np.float32)
+        self.f = np.zeros(1)
         numSents = 0
         #Index of next ending mark (a period)
         endIndex = self.text.find(self.ending)

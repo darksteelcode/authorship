@@ -10,7 +10,7 @@ class Diversity(base.BaseFeature):
     def calc(self):
         self.debugStart()
         self.beginCalc()
-        self.f = np.zeros(1, dtype=np.float32)
+        self.f = np.zeros(1)
         words = self.text.split(' ')
         #Need to be removed from words
         puncsToRemove = [".", ",", "'", "\"", ":", ";", "?", "!", "-"]

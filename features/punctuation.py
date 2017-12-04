@@ -21,7 +21,7 @@ class Punctuation(base.BaseFeature):
         self.beginCalc()
         self.checkArgs()
         #Add Calcs here for punctuation
-        self.f = np.zeros(len(self.puncs), dtype=np.float32)
+        self.f = np.zeros(len(self.puncs))
         puncIndex = 0
         for p in self.puncs:
             index = self.text.find(p)
