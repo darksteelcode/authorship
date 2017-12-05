@@ -36,7 +36,14 @@ class NeuralNetworkClassifier():
     def run(self, data):
         if self.debug:
             print "NeuralNetworkClassifier Classification Started"
-        
+
+        self.predict_input = tf.estimator.inputs.numpy_input_fn(
+            x={"x": np.array([data])},
+            num_epochs=1,
+            shuffle=False)
+        classification = self.classifier.predict(input_fn=self.predict_input)
+
         if self.debug:
             print "NeuralNetworkClassifier Classification Finished"
             print "Data classified to group "
+        return list(classification)[0]['classes']

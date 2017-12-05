@@ -26,3 +26,4 @@ authors = np.concatenate(featuresAuthors)
 
 classifier = neural.NeuralNetworkClassifier(sum(calcAuthor.LENGTHS), len(textDirs))
 classifier.train(samples, authors)
+print classifier.run(np.zeros(41))
