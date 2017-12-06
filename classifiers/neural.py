@@ -42,8 +42,8 @@ class NeuralNetworkClassifier():
             num_epochs=1,
             shuffle=False)
         classification = self.classifier.predict(input_fn=self.predict_input)
-
+        classification = list(classification)[0]['classes'][0]
         if self.debug:
             print "NeuralNetworkClassifier Classification Finished"
-            print "Data classified to group "
-        return list(classification)[0]['classes']
+            print "Data classified to group " + str(classification)
+        return int(classification)
