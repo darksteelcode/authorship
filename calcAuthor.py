@@ -31,6 +31,8 @@ class CalcAuthorBatch():
             self.txt += file.read()
             file.close()
         self.numSamples = int(math.floor(float(len(self.txt))/float(self.sampleLength)))
+        if self.oneSample:
+            self.numSamples = 1
         self.f = np.zeros((self.numSamples, sum(LENGTHS)))
 
     def getNumSamples(self):
@@ -40,7 +42,10 @@ class CalcAuthorBatch():
         for i in range(self.numSamples):
             calculatedFeats = []
             for feat in self.feats:
-                f = feat(self.txt[i*self.sampleLength:(i+1)*self.sampleLength], self.dir, [], self.debug)
+                if not self.oneSample:
+                    f = feat(self.txt[i*self.sampleLength:(i+1)*self.sampleLength], self.dir, [], self.debug)
+                else:
+                    f = feat(self.txt, self.dir, [], self.debug)
                 calculatedFeats.append(f.calc())
             self.f[i] = np.concatenate(calculatedFeats)
             if self.debug:
