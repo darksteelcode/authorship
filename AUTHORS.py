@@ -1,5 +1,5 @@
 import glob
-import calcAuthor
+import calcFeatures
 attributions = []
 def getAttributions(dir, authors):
     f = open(dir+"/AUTHORS.txt")
@@ -16,6 +16,7 @@ def getAuthor(text):
 
 def getSamplesAndAuthors(dir, authors, debug):
     getAttributions(dir, authors)
-    
+    for f in glob.glob(dir+"/*.txt"):
+        calc = calcAuthors.CalcAuthorBatch(f, False, 0, True)
 
 getAttributions("texts/Unknown/",["Jane Austen", "Walter Scott", "Arthur Conan Doyle", "Charles Dickens", "Mark Twain", "Louisa Alcott"])

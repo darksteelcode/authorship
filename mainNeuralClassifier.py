@@ -14,7 +14,7 @@ featuresCalculated = []
 featuresAuthors = []
 authorNum = 0
 for directory in textDirs:
-    c = calcAuthor.CalcAuthorBatch(directory, True, sampleLength)
+    c = calcAuthor.CalcAuthorBatch(directory, True, sampleLength, False)
     featuresCalculated.append(c.calcFeatures())
     featuresAuthors.append(np.zeros(c.getNumSamples(), dtype=np.int))
     featuresAuthors[len(featuresAuthors)-1].fill(authorNum)
