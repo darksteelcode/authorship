@@ -16,7 +16,11 @@ def getAuthor(text):
 
 def getSamplesAndAuthors(dir, authors, debug):
     getAttributions(dir, authors)
+    featuresCalculated = []
+    authorsCalculated = []
     for f in glob.glob(dir+"/*.txt"):
         calc = calcAuthors.CalcAuthorBatch(f, False, 0, True)
-
-getAttributions("texts/Unknown/",["Jane Austen", "Walter Scott", "Arthur Conan Doyle", "Charles Dickens", "Mark Twain", "Louisa Alcott"])
+        featuresCalculated.append(calc.calcFeatures())
+        authorsCalculated.append(np.zeros(calc.getNumSamples(), dtype=np.int))
+        authorsCalculated[len(authorsCalculated)-1].fill(getAuthor(f))
+    return [np.concatenate(featuresCalculated), np.concatenate(authorsCalculated)]
