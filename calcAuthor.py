@@ -1,7 +1,7 @@
 import numpy as np
 import glob, math
 
-#Calculate features for a directory of texts with a given sample length - results are inpts to neural netrwork classifier
+#Calculate features for a directory of texts, or text, ditermined by isDir with a given sample length - results are inpts to neural netrwork classifier
 
 from features import base, commonWords, punctuation, sentLength, diversity
 
@@ -10,17 +10,23 @@ FEATURES = [commonWords.CommonWords, punctuation.Punctuation, sentLength.Sentenc
 LENGTHS = [commonWords.LENGTH, punctuation.LENGTH, sentLength.LENGTH, diversity.LENGTH]
 
 class CalcAuthorBatch():
-    def __init__(self, dir, sampleLength, args=[[]] * len(FEATURES), features=FEATURES, debug=True):
-        self.dir = dir
+    def __init__(self, file, isDir, sampleLength, args=[[]] * len(FEATURES), features=FEATURES, debug=True):
+        self.dir = file
         #Length of each sample, in characters
         self.sampleLength = sampleLength
         self.args = args
         self.feats = features
         self.debug = debug
+        self.isDir = isDir
         #String Containing all files in dir lumped togeather
         self.txt = ""
-        for f in glob.glob(self.dir + "/*.txt"):
-            file = open(f)
+        if self.isDir:
+            for f in glob.glob(self.dir + "/*.txt"):
+                file = open(f)
+                self.txt += file.read()
+                file.close()
+        else:
+            file = open(self.dir)
             self.txt += file.read()
             file.close()
         self.numSamples = int(math.floor(float(len(self.txt))/float(self.sampleLength)))

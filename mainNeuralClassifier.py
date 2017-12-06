@@ -6,6 +6,7 @@ debug = True
 authors = ["Jane Austen", "Walter Scott", "Arthur Conan Doyle", "Charles Dickens", "Mark Twain", "Louisa Alcott"]
 #Index coresponds to authors array
 textDirs = ["texts/Jane_Austen", "texts/Walter_Scott", "texts/Arthur_Doyle", "texts/Charles_Dickens", "texts/Mark_Twain", "texts/Louisa_Alcott"]
+unknownDir = "texts/Unknown"
 sampleLength = 10000
 #array of CalcAuthorBatch results
 featuresCalculated = []
@@ -13,7 +14,7 @@ featuresCalculated = []
 featuresAuthors = []
 authorNum = 0
 for directory in textDirs:
-    c = calcAuthor.CalcAuthorBatch(directory, sampleLength)
+    c = calcAuthor.CalcAuthorBatch(directory, True, sampleLength)
     featuresCalculated.append(c.calcFeatures())
     featuresAuthors.append(np.zeros(c.getNumSamples(), dtype=np.int))
     featuresAuthors[len(featuresAuthors)-1].fill(authorNum)
