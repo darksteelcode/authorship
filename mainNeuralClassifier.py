@@ -26,3 +26,4 @@ authors = np.concatenate(featuresAuthors)
 
 classifier = neural.NeuralNetworkClassifier(sum(calcAuthor.LENGTHS), len(textDirs))
 classifier.train(samples, authors)
+print str(classifier.testAccuracy(samples, authors)) + " Accuracy on short training samples with noise"

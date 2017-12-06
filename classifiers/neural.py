@@ -47,3 +47,18 @@ class NeuralNetworkClassifier():
             print "NeuralNetworkClassifier Classification Finished"
             print "Data classified to group " + str(classification)
         return int(classification)
+
+    def testAccuracy(self, samples, authors):
+        if self.debug:
+            print "NeuralNetworkClassifier Accuracy Evaluation Started"
+        self.test_input = tf.estimator.inputs.numpy_input_fn(
+            x={"x": np.array(samples)},
+            y=np.array(authors),
+            num_epochs=1,
+            shuffle=False)
+        accuracy = self.classifier.evaluate(input_fn=self.test_input)["accuracy"]
+
+        print "Accuracy " + str(accuracy)
+        if self.debug:
+            print "NeuralNetworkClassifier Accuracy Evauation Successfully"
+        return accuracy
