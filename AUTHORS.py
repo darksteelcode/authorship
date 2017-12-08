@@ -1,5 +1,6 @@
 import glob
-import calcFeatures
+import calcAuthor
+import numpy as np
 attributions = []
 def getAttributions(dir, authors):
     f = open(dir+"/AUTHORS.txt")
@@ -11,7 +12,7 @@ def getAttributions(dir, authors):
 
 def getAuthor(text):
     for i in range(len(attributions)):
-        if attributions[i][0] == text:
+        if attributions[i][0] in text:
             return attributions[i][1]
 
 def getSamplesAndAuthors(dir, authors, debug):
@@ -19,8 +20,10 @@ def getSamplesAndAuthors(dir, authors, debug):
     featuresCalculated = []
     authorsCalculated = []
     for f in glob.glob(dir+"/*.txt"):
-        calc = calcAuthors.CalcAuthorBatch(f, False, 0, True)
+        if "AUTHORS.txt" in f:
+            continue
+        calc = calcAuthor.CalcAuthorBatch(f, False, 1, True)
         featuresCalculated.append(calc.calcFeatures())
         authorsCalculated.append(np.zeros(calc.getNumSamples(), dtype=np.int))
         authorsCalculated[len(authorsCalculated)-1].fill(getAuthor(f))
-    return [np.concatenate(featuresCalculated), np.concatenate(authorsCalculated)]
+    return np.concatenate(featuresCalculated), np.concatenate(authorsCalculated)
