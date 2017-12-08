@@ -12,7 +12,7 @@ class NeuralNetworkClassifier():
         self.feature_column = [tf.feature_column.numeric_column("x", shape=[self.sampleLen])]
         # 3 Layers
         self.classifier = tf.estimator.DNNClassifier(feature_columns=self.feature_column,
-                                                hidden_units=[20, 20, 10],
+                                                hidden_units=[6, 12, 24, 6],
                                                 n_classes=self.numAuthors,
                                                 model_dir="/tmp/authorship_classifier_model")
 
@@ -25,10 +25,10 @@ class NeuralNetworkClassifier():
             y=np.array(authors),
             num_epochs=None,
             shuffle=True)
-        for i in range(5):
-            self.classifier.train(input_fn=self.train_inputs, steps=400)
+        for i in range(50):
+            self.classifier.train(input_fn=self.train_inputs, steps=800)
             if self.debug:
-                print "Trained " + str((i+1)*400) + " steps"
+                print "Trained " + str((i+1)*800) + " steps"
 
         if self.debug:
             print "NeuralNetworkClassifier Trained Successfully"
@@ -45,8 +45,23 @@ class NeuralNetworkClassifier():
         classification = list(classification)[0]['classes'][0]
         if self.debug:
             print "NeuralNetworkClassifier Classification Finished"
-            print "Data classified to group " + str(classification)
         return int(classification)
+
+    def getPredictions(self, data):
+        if self.debug:
+            print "NeuralNetworkClassifier Classification Started"
+
+        self.predict_input = tf.estimator.inputs.numpy_input_fn(
+            x={"x": np.array(data)},
+            num_epochs=1,
+            shuffle=False)
+        classification = list(self.classifier.predict(input_fn=self.predict_input))
+        probabilities = []
+        for s in classification:
+            probabilities.append(s['probabilities'])
+        if self.debug:
+            print "NeuralNetworkClassifier Classification Finished"
+        return probabilities
 
     def testAccuracy(self, samples, authors):
         if self.debug:

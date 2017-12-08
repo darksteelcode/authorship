@@ -8,7 +8,7 @@ authors = ["Jane Austen", "Walter Scott", "Arthur Conan Doyle", "Charles Dickens
 #Index coresponds to authors array
 textDirs = ["texts/Jane_Austen", "texts/Walter_Scott", "texts/Arthur_Doyle", "texts/Charles_Dickens", "texts/Mark_Twain", "texts/Louisa_Alcott"]
 unknownDir = "texts/Unknown"
-sampleLength = 100000
+sampleLength = 5000
 #array of CalcAuthorBatch results
 featuresCalculated = []
 #Features Authors
@@ -25,14 +25,15 @@ for directory in textDirs:
 samples = np.concatenate(featuresCalculated)
 #Numpy Array of feature sample's authors
 sampleAuthors = np.concatenate(featuresAuthors)
-
 classifier = neural.NeuralNetworkClassifier(sum(calcAuthor.LENGTHS), len(textDirs))
+
 classifier.train(samples, sampleAuthors)
 trainingAccuracy = classifier.testAccuracy(samples, sampleAuthors)
 
-testSamples, testSamplesAuthors = AUTHORS.getSamplesAndAuthors("texts/Unknown", authors, debug)
+testSamples, testSamplesAuthors = AUTHORS.getSamplesAndAuthors("texts/Unknown", authors, debug, sampleLength)
 
 unknownAccuracy = classifier.testAccuracy(testSamples, testSamplesAuthors)
 
+print AUTHORS.calcAttributions(unknownDir, authors, sampleLength, classifier)
 print str(round(trainingAccuracy*100)) + "% Accuracy on short training samples with noise"
-print str(round(unknownAccuracy*100)) + "% Accuracy on Unknown Texts"
+print str(round(unknownAccuracy*100)) + "% Accuracy on short unknown texts with noise"
