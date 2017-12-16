@@ -15,13 +15,24 @@ attributions = []
 classifier = weighted.WeightedClassifier(len(textDirs), sum(calcAuthor.LENGTHS))
 
 groupIndex = 0
+
+#Features calculated for each author and text
+features = []
 for author in textDirs:
-    features = []
+    authorFeatures = []
     for f in glob.glob(author + "/*.txt"):
         calculator = calcAuthor.CalcAuthorBatch(f, False, 1, True)
-        features.append(calculator.calcFeatures()[0])
-    classifier.train(features, groupIndex)
+        authorFeatures.append(calculator.calcFeatures()[0])
+    features.append(authorFeatures)
     groupIndex+=1
+
+classifier.adjustWeights(features)
+
+groupIndex = 0
+for f in features:
+    classifier.train(f, groupIndex)
+    groupIndex += 1
+
 
 for f in glob.glob(unknownDir + "/*.txt"):
     if "AUTHORS" in f:
@@ -40,4 +51,4 @@ for a in attributions:
         correct += 1
     numFiles+=1
 
-print round((float(correct)/float(numFiles))*100)
+print str(round((float(correct)/float(numFiles))*100)) + " % Correct"
