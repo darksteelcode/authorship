@@ -16,8 +16,11 @@ classifier = weightedClean.WeightedClassifier(len(textDirs), sum(calcAuthor.LENG
 
 groupIndex = 0
 for author in textDirs:
-    calculator = calcAuthor.CalcAuthorBatch(author, True, 1, True)
-    classifier.setGroupAvg(calculator.calcFeatures()[0], groupIndex)
+    features = []
+    for f in glob.glob(author + "/*.txt"):
+        calculator = calcAuthor.CalcAuthorBatch(f, False, 1, True)
+        features.append(calculator.calcFeatures()[0])
+    classifier.train(features, groupIndex)
     groupIndex+=1
 
 for f in glob.glob(unknownDir + "/*.txt"):
