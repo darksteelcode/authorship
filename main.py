@@ -5,9 +5,9 @@ import calcAuthor
 import AUTHORS
 from classifiers import weighted
 debug = True
-authors = ["Jane Austen", "Walter Scott", "Arthur Conan Doyle", "Charles Dickens", "Mark Twain", "Louisa Alcott"]
+authors = ["Jane Austen", "Walter Scott", "Arthur Conan Doyle", "Charles Dickens", "Mark Twain", "Louisa Alcott", "Jack London"]
 #Index coresponds to authors array
-textDirs = ["texts/Jane_Austen", "texts/Walter_Scott", "texts/Arthur_Doyle", "texts/Charles_Dickens", "texts/Mark_Twain", "texts/Louisa_Alcott"]
+textDirs = ["texts/Jane_Austen", "texts/Walter_Scott", "texts/Arthur_Doyle", "texts/Charles_Dickens", "texts/Mark_Twain", "texts/Louisa_Alcott", "texts/Jack_London"]
 unknownDir = "texts/Unknown"
 #List of guessed attributions in format [[name, authorNum], [name, authorNum]]
 attributions = []
