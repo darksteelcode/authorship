@@ -29,7 +29,7 @@ class WordLength(base.BaseFeature):
         #Index of previous seperating mark-used to find word length
         prevIndex = 0
         while endIndex != -1:
-            numWOrds += 1
+            numWords += 1
             self.f[0] += endIndex - prevIndex
             prevIndex = endIndex
             endIndex = self.text.find(self.seperator, prevIndex+1)

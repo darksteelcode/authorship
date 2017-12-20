@@ -10,10 +10,10 @@ class WeightedClassifier():
         self.numAuthors = numAuthors
         self.means = np.empty(shape=[numAuthors, dataSize])
         self.debug = debug
-        #Lengths of each feature 30 for commonWords, 9 for punctuation, 1 for sentLength, 1 for diversity
-        self.featureGroups = [30, 9, 1, 1] #NEEDS TO BE UPDATED FOR NEW FEATURES
+        #Lengths of each feature 30 for commonWords, 9 for punctuation, 1 for sentLength, 1 for diversity, 1 for wordLength
+        self.featureGroups = [30, 9, 1, 1, 1] #NEEDS TO BE UPDATED FOR NEW FEATURES
         #Weights to adjust importance of different features
-        self.featureWeights = [1.0, 1.0, 1.0, 1.0]
+        self.featureWeights = [1.0, 1.0, 1.0, 1.0, 1.0]
         #When weighting, new = (input + biases) * weights
         #Weights to multiply by
         self.weights = np.zeros(self.dataSize)
