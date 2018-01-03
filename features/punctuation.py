@@ -1,7 +1,8 @@
 import numpy as np
 import base
 
-LENGTH = 9
+#Nine Punctuation marks, plus frequency of any mark
+LENGTH = 10
 
 class Punctuation(base.BaseFeature):
     def __init__(self, text,  textName="", args=[], debug=True):
@@ -21,7 +22,7 @@ class Punctuation(base.BaseFeature):
         self.beginCalc()
         self.checkArgs()
         #Add Calcs here for punctuation
-        self.f = np.zeros(len(self.puncs))
+        self.f = np.zeros(len(self.puncs)+1)
         puncIndex = 0
         for p in self.puncs:
             index = self.text.find(p)
@@ -31,6 +32,8 @@ class Punctuation(base.BaseFeature):
             puncIndex += 1
         numPuncs = sum(self.text.count(p) for p in self.puncs)
         self.f/=numPuncs
+        #Last element is frequency of punctuation mark
+        self.f[len(self.puncs)] = float(numPuncs)/float(len(self.text))
         self.endCalc()
         return self.f
 
