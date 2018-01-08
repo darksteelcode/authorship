@@ -5,10 +5,18 @@ import calcAuthor
 import AUTHORS
 from classifiers import weighted
 debug = True
-authors = ["Jane Austen", "Walter Scott", "Arthur Conan Doyle", "Charles Dickens", "Mark Twain", "Louisa Alcott", "Jack London"]
+'''
+#Classical texts
+authors = ["Jane Austen", "Walter Scott", "Arthur Conan Doyle", "Charles Dickens", "Mark Twain", "Louisa Alcott", "Jack London", "NOT_ATTRIBUTED"]
 #Index coresponds to authors array
 textDirs = ["texts/Jane_Austen", "texts/Walter_Scott", "texts/Arthur_Doyle", "texts/Charles_Dickens", "texts/Mark_Twain", "texts/Louisa_Alcott", "texts/Jack_London"]
 unknownDir = "texts/Unknown"
+'''
+
+authors = ["candidate00001", "candidate00002", "candidate00003", "NOT_ATTRIBUTED"]
+textDirs = ["pan_texts/pan12-problem-b/candidate00001", "pan_texts/pan12-problem-b/candidate00002", "pan_texts/pan12-problem-b/candidate00003"]
+unknownDir = "pan_texts/pan12-problem-b/unknown"
+
 #List of guessed attributions in format [[name, authorNum], [name, authorNum]]
 attributions = []
 
@@ -45,10 +53,12 @@ numFiles = 0
 
 for a in attributions:
     print a[0] + " attributed to " + authors[a[1]]
-    real = AUTHORS.getAuthor(a[0], AUTHORS.getAttributions("texts/Unknown", authors))
+    real = AUTHORS.getAuthor(a[0], AUTHORS.getAttributions(unknownDir, authors))
     print "Really: " + authors[real]
     if real == a[1]:
         correct += 1
-    numFiles+=1
+    #Don't count texts with no given author as wrong - pan has these, but tjis program is not designed to handle them
+    if authors[real] != "NOT_ATTRIBUTED":
+        numFiles+=1
 
 print str(round((float(correct)/float(numFiles))*100)) + " % Correct"

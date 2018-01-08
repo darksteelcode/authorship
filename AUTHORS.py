@@ -7,7 +7,10 @@ def getAttributions(dir, authors):
     for line in f:
         groups = line.split(":")
         groups[1] = groups[1].replace("\n", "")
-        groups[1] = authors.index(groups[1])
+        try:
+            groups[1] = authors.index(groups[1])
+        except ValueError:
+            groups[1] = -1
         attributions.append(groups)
     return attributions
 
