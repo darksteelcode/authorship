@@ -3,11 +3,11 @@ import glob, math
 
 #Calculate features for a directory of texts, or text, ditermined by isDir with a given sample length - or whole file, ditermined by oneSample - results are inpts to neural netrwork classifier
 
-from features import base, commonWords, punctuation, sentLength, diversity, wordLength
+from features import base, commonWords, punctuation, sentLength, diversity, wordLength, wordVectors
 
-FEATURES = [commonWords.CommonWords, punctuation.Punctuation, sentLength.SentenceLength, diversity.Diversity, wordLength.WordLength]
+FEATURES = [commonWords.CommonWords, punctuation.Punctuation, sentLength.SentenceLength, diversity.Diversity, wordLength.WordLength, wordVectors.WordVectors]
 
-LENGTHS = [commonWords.LENGTH, punctuation.LENGTH, sentLength.LENGTH, diversity.LENGTH, wordLength.LENGTH]
+LENGTHS = [commonWords.LENGTH, punctuation.LENGTH, sentLength.LENGTH, diversity.LENGTH, wordLength.LENGTH, wordVectors.LENGTH]
 
 class CalcAuthorBatch():
     def __init__(self, file, isDir, sampleLength, oneSample, args=[[]] * len(FEATURES), features=FEATURES, debug=True):

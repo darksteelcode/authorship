@@ -5,7 +5,7 @@ import base
 #Number of word classes
 LENGTH = 500
 
-VECTOR_FILE = open("classes.goodSorted.txt")
+VECTOR_FILE = open("features/classes.goodSorted.txt")
 VECTOR_FILE_DATA = VECTOR_FILE.read()
 
 #Calculated the index of each two char combination of lowercase letters in the vector file, then, when searching for word class, start at index of first two chras of word and serach from there
@@ -89,6 +89,3 @@ class WordVectors(base.BaseFeature):
     def debugStart(self):
         if self.debug:
             print "--WordVectors--"
-
-f = WordVectors("the anvil is good", "Test")
-f.calc()
