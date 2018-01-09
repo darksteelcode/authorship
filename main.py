@@ -5,6 +5,11 @@ import calcAuthor
 import AUTHORS
 from classifiers import weighted
 debug = True
+
+authors = []
+textDirs = []
+unknownDir = ""
+
 '''
 #Classical texts
 authors = ["Jane Austen", "Walter Scott", "Arthur Conan Doyle", "Charles Dickens", "Mark Twain", "Louisa Alcott", "Jack London", "NOT_ATTRIBUTED"]
@@ -13,9 +18,17 @@ textDirs = ["texts/Jane_Austen", "texts/Walter_Scott", "texts/Arthur_Doyle", "te
 unknownDir = "texts/Unknown"
 '''
 
-authors = ["candidate00001", "candidate00002", "candidate00003", "NOT_ATTRIBUTED"]
-textDirs = ["pan_texts/pan12-problem-b/candidate00001", "pan_texts/pan12-problem-b/candidate00002", "pan_texts/pan12-problem-b/candidate00003"]
-unknownDir = "pan_texts/pan12-problem-b/unknown"
+#PAN Problems
+#Generate authors, textDirs, and unknownDir for PAN problems
+def genPANArrays(dir, numCandidates):
+    for i in range(1,numCandidates+1):
+        authors.append("candidate" + str(i).zfill(5))
+        textDirs.append(dir + "/" + authors[i-1])
+    authors.append("NOT_ATTRIBUTED")
+    unknownDir = dir + "/unknown"
+    return unknownDir
+unknownDir = genPANArrays("pan_texts/pan12-problem-j", 14)
+
 
 #List of guessed attributions in format [[name, authorNum], [name, authorNum]]
 attributions = []
@@ -57,8 +70,9 @@ for a in attributions:
     print "Really: " + authors[real]
     if real == a[1]:
         correct += 1
-    #Don't count texts with no given author as wrong - pan has these, but tjis program is not designed to handle them
+    #Don't count texts with no given author as wrong - pan has these, but this program is not designed to handle them
     if authors[real] != "NOT_ATTRIBUTED":
         numFiles+=1
 
 print str(round((float(correct)/float(numFiles))*100)) + " % Correct"
+print str(correct) + "/" + str(numFiles)

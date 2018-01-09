@@ -5,9 +5,9 @@ import glob, math
 
 from features import base, commonWords, punctuation, sentLength, diversity, wordLength, wordVectors
 
-FEATURES = [commonWords.CommonWords, punctuation.Punctuation, sentLength.SentenceLength, diversity.Diversity, wordLength.WordLength]#, wordVectors.WordVectors''']
+FEATURES = [commonWords.CommonWords, punctuation.Punctuation, sentLength.SentenceLength, diversity.Diversity, wordLength.WordLength, wordVectors.WordVectors]
 
-LENGTHS = [commonWords.LENGTH, punctuation.LENGTH, sentLength.LENGTH, diversity.LENGTH, wordLength.LENGTH]#, wordVectors.LENGTH''']
+LENGTHS = [commonWords.LENGTH, punctuation.LENGTH, sentLength.LENGTH, diversity.LENGTH, wordLength.LENGTH, wordVectors.LENGTH]
 
 class CalcAuthorBatch():
     def __init__(self, file, isDir, sampleLength, oneSample, args=[[]] * len(FEATURES), features=FEATURES, debug=True):
