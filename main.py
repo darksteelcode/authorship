@@ -4,13 +4,14 @@ import glob
 import calcAuthor
 import AUTHORS
 from classifiers import weighted
+import sys
 debug = True
 
 authors = []
 textDirs = []
 unknownDir = ""
-
 '''
+
 #Classical texts
 authors = ["Jane Austen", "Walter Scott", "Arthur Conan Doyle", "Charles Dickens", "Mark Twain", "Louisa Alcott", "Jack London", "NOT_ATTRIBUTED"]
 #Index coresponds to authors array
@@ -19,7 +20,7 @@ unknownDir = "texts/Unknown"
 '''
 
 #PAN Problems
-#Generate authors, textDirs, and unknownDir for PAN problems
+#Generate authors, textDirs, and unknownDir for PAN problems automatically
 def genPANArrays(dir, numCandidates):
     for i in range(1,numCandidates+1):
         authors.append("candidate" + str(i).zfill(5))
@@ -27,7 +28,8 @@ def genPANArrays(dir, numCandidates):
     authors.append("NOT_ATTRIBUTED")
     unknownDir = dir + "/unknown"
     return unknownDir
-unknownDir = genPANArrays("pan_texts/pan12-problem-j", 14)
+panLens = {'a':3, 'b':3, 'c':8, 'd':8, 'i':14, 'j':14}
+unknownDir = genPANArrays("pan_texts/pan12-problem-" + sys.argv[1], panLens[sys.argv[1]])
 
 
 #List of guessed attributions in format [[name, authorNum], [name, authorNum]]

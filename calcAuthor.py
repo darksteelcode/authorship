@@ -19,6 +19,9 @@ class CalcAuthorBatch():
         self.debug = debug
         self.isDir = isDir
         self.oneSample = oneSample
+        #Used to limit length of text for testing
+        self.limitLength = False
+        self.lengthLimit = 50000
         #String Containing all files in dir lumped togeather
         self.txt = ""
         if self.isDir:
@@ -30,6 +33,8 @@ class CalcAuthorBatch():
             file = open(self.dir)
             self.txt += file.read()
             file.close()
+        if self.limitLength:
+            self.txt = self.txt[:self.lengthLimit]
         self.numSamples = int(math.floor(float(len(self.txt))/float(self.sampleLength)))
         if self.oneSample:
             self.numSamples = 1

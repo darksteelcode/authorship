@@ -13,7 +13,7 @@ class WeightedClassifier():
         #Lengths of each feature 30 for commonWords, 10 for punctuation, 1 for sentLength, 1 for diversity, 1 for wordLength
         self.featureGroups = [30, 10, 1, 1, 1, 50] #NEEDS TO BE UPDATED FOR NEW FEATURES
         #Weights to adjust importance of different features - used to test accuracy of individual features
-        self.featureWeights = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+        self.featureWeights = [0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
         #When weighting, new = (input + biases) * weights
         #Weights to multiply by
         self.weights = np.zeros(self.dataSize)
